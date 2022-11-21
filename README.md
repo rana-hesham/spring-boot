@@ -17,7 +17,7 @@ Kubernetes
 
 2- Connect to the azure virtual machine remotely using "MobaXterm"
 
-3- Download spring boot application code then drag and drop it at MobaXterm
+3- Download spring boot application code then drag and drop it on MobaXterm
 
 4- Install JDK.11 on azure vm
 
