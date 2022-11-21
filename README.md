@@ -3,7 +3,7 @@
 
 ## Technologies
 ``` 
-Azure Vertual Machine
+Azure Virtual Machine
 Docker
 GitHub
 Jenkins
