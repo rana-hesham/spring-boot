@@ -29,7 +29,7 @@ Kubernetes
 
 
 
-## Dokerize Spring Boot Project 
+## Dockerize Spring Boot Project 
 
 
 **create a Dockerfile (multi-stage build)**
@@ -78,24 +78,27 @@ docker container run --name springbootapplication -d -p 80:80 ranahesham/springb
 ![image](https://user-images.githubusercontent.com/61191521/203036348-773aa244-7ebe-419f-8f66-7793a3f066ef.png)
 
 
+# Minikube
 
-## Deploy Spring Boot App to local minikube
+**Deploy Spring Boot App to local minikube**
+
+![image](https://user-images.githubusercontent.com/61191521/203040513-21c80e6b-4694-400a-af15-3d57a04fc1a8.png)
 
 
 **Dev deployment (Imperative configuration)**
 
-kubectl create deployments --image=ranahesham/springbootapp:v1.1 --namespace=dev --replicas=3 --dry-run -o yaml >dev_deployment
+kubectl create deployment --image=ranahesham/springbootapp:v1.1 --namespace=dev --replicas=3 --dry-run -o yaml >dev_deployment
 
 
 **Prod deployment (Declarative configuration)**
 
-kubectl create -f prod_deployments.yaml
+kubectl create -f prod-deployments.yaml
 
 ```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: prod-springboot
+  name: prod
   namespace: prod
 spec:
   selector:
@@ -113,3 +116,7 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
+```
+
+
+![image](https://user-images.githubusercontent.com/61191521/203043745-6d90d65b-7216-4490-998a-f6e8218b5e5f.png)
