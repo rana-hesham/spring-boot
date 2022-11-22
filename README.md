@@ -87,7 +87,7 @@ docker container run --name springbootapplication -d -p 80:80 ranahesham/springb
 
 **Dev deployment (Imperative configuration)**
 
-kubectl create deployment --image=ranahesham/springbootapp:v1.1 --namespace=dev --replicas=3 --dry-run -o yaml >dev_deployment
+kubectl create deployment --image=ranahesham/springbootapp:v1.1 dev --namespace=dev --replicas=3
 
 
 **Prod deployment (Declarative configuration)**
