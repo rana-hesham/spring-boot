@@ -66,6 +66,7 @@ docker build --pull --rm -f "Dockerfile" -t demo:latest2 "."
 **Add the image to docker registry**
 
  docker tag demo:latest2 ranahesham/springbootapp:v1.1
+ 
  docker image push ranahesham/springbootapp:v1.1
  
  ![image](https://user-images.githubusercontent.com/61191521/203037250-22a54755-ebe8-4d13-918d-26bac8331f9a.png)
