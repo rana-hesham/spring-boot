@@ -34,8 +34,9 @@ Kubernetes
 
 **create a Dockerfile (multi-stage build)**
 
-The first stage have a gradle base image --- create a JAR file of our java project (gradle build)
-Then the second stage have a java base image --- use this jar file to create our image (COPY --from=build ../*.jar ./spring-boot-application.jar)
+The first stage have a gradle base image ---> create a JAR file of our java project (gradle build)
+
+Then the second stage have a java base image ---> Copy the output JAR file from the first stage (COPY --from=build ../*.jar ./spring-boot-application.jar)
 
 ```
 FROM gradle:7.1.0-jdk11 AS build
