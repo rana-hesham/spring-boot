@@ -117,7 +117,7 @@ Pipeline {
         }
         stage(sonar-qube) {
             steps {
-                sh 'echo "...................SONARQUBE STAGE................"'
+                echo '...................SONARQUBE STAGE................'
                 }
         }
         stage(build) {
