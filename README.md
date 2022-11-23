@@ -85,9 +85,11 @@ docker container run --name springbootapplication -d -p 80:80 ranahesham/springb
 
 # Jenkins Multibranch Pipeline
 
-**Create a Jenkinsfile**
+**Steps**
 
-In Dev Branch with 5 stages :
+**1. Create a Jenkinsfile**
+
+In Dev Branch with a 5 stages :
 
 -Lint Stage
 
@@ -115,7 +117,7 @@ Pipeline {
         }
         stage(sonar-qube) {
             steps {
-                sh '...................echo SONARQUBE STAGE................'
+                sh 'echo "...................SONARQUBE STAGE................"'
                 }
         }
         stage(build) {
@@ -153,6 +155,10 @@ Pipeline {
     }
 }
 ```
+
+**2. Add Credentials to enable jenkins to login our docker registry**
+
+![image](https://user-images.githubusercontent.com/61191521/203577406-295e4268-9e73-457c-84c4-eb65a6049fad.png)
 
 
 
