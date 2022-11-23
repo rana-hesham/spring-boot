@@ -82,6 +82,80 @@ docker container run --name springbootapplication -d -p 80:80 ranahesham/springb
 ![image](https://user-images.githubusercontent.com/61191521/203409635-fb2c6c2f-49ec-4c6b-a830-6785980ca0eb.png)
 
 
+
+# Jenkins Multibranch Pipeline
+
+**Create a Jenkinsfile**
+
+In Dev Branch with 5 stages :
+
+-Lint Stage
+
+-Unit Test Stage
+
+-SonarQube Stage
+
+-Build Stage
+
+-Dev Depolyment Stage
+
+```
+Pipeline {
+    stages {
+        stage(lint) {
+            steps {
+                npm install -g npm-groovy-lint
+                npm-groovy-lint
+            }
+        }
+        stage(unit-test) {
+            steps {
+                junit '**/test-results/test/*.xml'
+            }
+        }
+        stage(sonar-qube) {
+            steps {
+                sh '...................echo SONARQUBE STAGE................'
+                }
+        }
+        stage(build) {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub', usernameVariable: 'username', passwordVariable: 'pass')]) {
+                sh 'docker login -u ${username} -p ${pass}'
+                sh 'docker build --pull --rm -f "Dockerfile" -t ranahesham/springbootapp:v1.2 "."'
+                sh 'docker image push ranahesham/springbootapp:v1.2'
+                }
+            }                                    
+        }
+         stage(dev-deployment) {
+            steps {
+                sh 'kubectl create namespace dev'
+                sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.1 dev --namespace=dev --replicas=3'
+                }
+        }
+    }
+}
+```
+
+In Prod Branch with 1 stage:
+
+-Prod Depolyment Stage
+
+```
+Pipeline {
+    stages {
+         stage(prod-deployment) {
+            steps {
+                sh 'kubectl create namespace prod'
+                sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.1 prod --namespace=prod --replicas=3'
+                }
+        }
+    }
+}
+```
+
+
+
 # Minikube
 
 **Deploy Spring Boot App to local minikube**
