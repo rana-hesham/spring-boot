@@ -2,15 +2,9 @@ pipeline {
     agent any
     stages {
         stage(lint) {
-            script {
-                try {
-                    sh 'chmod +x gradlew'
-                    sh './gradlew lint'
-                } finally {
-                    step([$class: 'ArtifactArchiver', artifacts: 'app/build/reports/staticAnalysis/lint/', fingerprint: true])
-                }
+            steps {
+                echo '...................LINT STAGE................'
             }
-
         }
         stage(unit_test) {
             steps {
@@ -20,7 +14,7 @@ pipeline {
         stage(sonar_qube) {
             steps {
                 echo '...................SONARQUBE STAGE................'
-                }
+            }
         }
         stage(build) {
             steps {
