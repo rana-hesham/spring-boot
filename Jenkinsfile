@@ -1,4 +1,5 @@
 Pipeline {
+    agent any
     stages {
         stage(lint) {
             steps {
