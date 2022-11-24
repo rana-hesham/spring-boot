@@ -102,24 +102,24 @@ In Dev Branch with a 5 stages :
 -Dev Depolyment Stage
 
 ```
-Pipeline {
+pipeline {
     agent any
     stages {
         stage(lint) {
             steps {
-                npm install -g npm-groovy-lint
-                npm-groovy-lint
+                echo '...................LINT STAGE................'
             }
         }
-        stage(unit-test) {
+        stage(unit_test) {
             steps {
-                junit '**/test-results/test/*.xml'
+                sh 'chmod +x gradlew'
+                sh './gradlew test'
             }
         }
-        stage(sonar-qube) {
+        stage(sonar_qube) {
             steps {
                 echo '...................SONARQUBE STAGE................'
-                }
+            }
         }
         stage(build) {
             steps {
@@ -127,7 +127,7 @@ Pipeline {
                 sh 'docker login -u ${username} -p ${pass}'
                 sh 'docker build --pull --rm -f "Dockerfile" -t ranahesham/springbootapp:v1.2 "."'
                 sh 'docker image push ranahesham/springbootapp:v1.2'
-                }
+                }    
             }                                    
         }
         stage(dev-deployment) {
