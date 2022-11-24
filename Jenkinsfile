@@ -3,7 +3,8 @@ pipeline {
     stages {
         stage(lint) {
             steps {
-                echo '...................LINT STAGE................'
+                npm install -g npm-groovy-lint
+                npm-groovy-lint
             }
         }
         stage(unit_test) {
