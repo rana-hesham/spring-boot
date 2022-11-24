@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage(lint) {
             steps {
-                echo '...................LINT STAGE................'
+                sh 'chmod +x gradlew'
+                sh './gradlew lint'
             }
         }
         stage(unit_test) {
             steps {
-                sh 'chmod +x gradlew'
                 sh './gradlew test'
             }
         }
