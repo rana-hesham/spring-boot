@@ -19,7 +19,6 @@ Pipeline {
         stage(build) {
             steps {
                 echo '...................BUILD STAGE................'
-                }
             }                                    
         }
     }
