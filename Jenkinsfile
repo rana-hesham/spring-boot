@@ -26,5 +26,10 @@ pipeline {
                 }    
             }                                    
         }
+        stage(dev-deployment) {
+            steps {
+                sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.1 dev --namespace=dev --replicas=3'
+            }
+        }
     }
 }
