@@ -28,7 +28,9 @@ pipeline {
         }
         stage(dev_deployment) {
             steps {
-                sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.2 dev-from-jenkins --namespace=dev --replicas=3'
+                script {
+                    kubernetesDeploy(configs: "prod_deployment.yaml", kubeconfigId: "mykubeconfig")
+                }
             }
         }
     }
