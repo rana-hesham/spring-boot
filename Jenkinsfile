@@ -6,12 +6,12 @@ pipeline {
                 echo '...................LINT STAGE................'
             }
         }
-        stage(unit-test) {
+        stage(unit_test) {
             steps {
                 echo '...................TEST STAGE................'
             }
         }
-        stage(sonar-qube) {
+        stage(sonar_qube) {
             steps {
                 echo '...................SONARQUBE STAGE................'
                 }
