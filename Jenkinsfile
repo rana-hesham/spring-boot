@@ -3,13 +3,12 @@ pipeline {
     stages {
         stage(lint) {
             steps {
-                npm install -g npm-groovy-lint
-                npm-groovy-lint
+                echo '...................LINT STAGE................'
             }
         }
         stage(unit_test) {
             steps {
-                echo '...................TEST STAGE................'
+                sh './gradlew test'
             }
         }
         stage(sonar_qube) {
