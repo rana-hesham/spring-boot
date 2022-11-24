@@ -28,7 +28,7 @@ pipeline {
         }
         stage(dev_deployment) {
             steps {
-                sh 'sudo kubectl create deployment --image=ranahesham/springbootapp:v1.2 dev-from-jenkins --namespace=dev --replicas=3'
+                sh 'echo Docker112022 | sudo -S kubectl create deployment --image=ranahesham/springbootapp:v1.2 dev-from-jenkins --namespace=dev --replicas=3'
             }
         }
     }
