@@ -103,6 +103,7 @@ In Dev Branch with a 5 stages :
 
 ```
 Pipeline {
+    agent any
     stages {
         stage(lint) {
             steps {
