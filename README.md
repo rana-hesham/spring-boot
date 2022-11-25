@@ -130,11 +130,12 @@ pipeline {
                 }    
             }                                    
         }
-        stage(dev-deployment) {
+        stage(dev_deployment) {
             steps {
-                sh 'kubectl create namespace dev'
-                sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.1 dev --namespace=dev --replicas=3'
+                withKubeConfig([credentialsId: 'mykubeconfig']) {
+                    sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.2 dev_deployment'
                 }
+            }
         }
     }
 }
