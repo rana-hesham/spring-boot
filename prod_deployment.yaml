@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prod_deployment_jenkins
+  namespace: prod
+spec:
+  selector:
+    matchLabels:
+      app: prod-springboot
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: prod-springboot
+    spec:
+      containers:
+        - name: demo-container
+          image: ranahesham/springbootapp:v1.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8082
