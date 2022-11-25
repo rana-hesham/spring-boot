@@ -9,7 +9,7 @@ pipeline {
         stage(prod_deployment) {
             steps {
                 withKubeConfig([credentialsId: 'mykubeconfig']) {
-                    sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.2 prod_deployment'
+                    sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.2 prod-deployment'
                 }
             }
         }
