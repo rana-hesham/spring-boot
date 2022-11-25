@@ -205,7 +205,6 @@ Add the kubernetes credintials which we created "config (minikube kubeconfig)"
 ![image](https://user-images.githubusercontent.com/61191521/203887751-900bf004-c6a0-4e10-8089-9df24c2b8a0d.png)
 
 
-![image](https://user-images.githubusercontent.com/61191521/203890915-df57a1ef-3e04-4348-9825-d3e527b6b998.png)
 
 **Dev branch console output**
 
