@@ -28,8 +28,8 @@ pipeline {
         }
         stage(dev_deployment) {
             steps {
-                script {
-                    kubernetesDeploy(configs: "prod_deployment.yaml", kubeconfigId: "mykubeconfig")
+                withKubeConfig([credentialsId: 'kubectl-user']) {
+                    sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.2 dev'
                 }
             }
         }
