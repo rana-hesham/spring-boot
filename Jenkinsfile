@@ -28,7 +28,7 @@ pipeline {
         }
         stage(dev_deployment) {
             steps {
-                withKubeConfig([credentialsId: 'kubectl-user']) {
+                withKubeConfig([credentialsId: 'mykubeconfig']) {
                     sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.2 dev'
                 }
             }
