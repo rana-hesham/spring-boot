@@ -1,10 +1,17 @@
-Pipeline {
+pipeline {
     agent any
     stages {
-         stage(prod-deployment) {
+        stage(prod_start) {
             steps {
-                echo '...............PROD BRANCH............'
+                echo '...................HELLO FROM PROD BRANCH...................'
+            }
+        }
+        stage(prod_deployment) {
+            steps {
+                withKubeConfig([credentialsId: 'mykubeconfig']) {
+                    sh 'kubectl create -f prod_deployment.yaml'
                 }
+            }
         }
     }
 }
