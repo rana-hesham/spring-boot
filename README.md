@@ -3,21 +3,17 @@
 
 ## Technologies
 ``` 
-Azure VM
-Docker
-GitHub
-Jenkins
-Kubernetes 
+Azure VM - Docker - GitHub - Jenkins - Kubernetes 
 ```
 
 
-## Azure Vertual Machine Preparation
+## Azure Virtual Machine Preparation
 
 1- Create an azure virtual machine linux(ubuntu 20.04)
 
-2- Connect to the azure virtual machine remotely using "MobaXterm"
+2- Connect to the vm remotely using "MobaXterm"
 
-3- Download spring boot application code then drag and drop it on MobaXterm
+3- Download the spring boot application code then drag and drop it on MobaXterm
 
 4- Install JDK.11 on azure vm
 
@@ -83,7 +79,7 @@ docker container run --name springbootapplication -d -p 80:80 ranahesham/springb
 
 
 
-# Jenkins Multibranch Pipeline
+*Jenkins Multibranch Pipeline*
 
 **Steps**
 
@@ -91,15 +87,7 @@ docker container run --name springbootapplication -d -p 80:80 ranahesham/springb
 
 In Dev Branch with a 5 stages :
 
--Lint Stage
-
--Unit Test Stage
-
--SonarQube Stage
-
--Build Stage
-
--Dev Depolyment Stage
+Lint Stage - Unit Test Stage - SonarQube Stage - Build Stage - Dev Depolyment Stage
 
 ```
 pipeline {
@@ -143,7 +131,7 @@ pipeline {
 
 In Prod Branch with a 2 stages:
 
--Prod Depolyment Stage
+Prod Start Stage - Prod Depolyment Stage
 
 ```
 pipeline {
@@ -166,16 +154,42 @@ pipeline {
 }
 ```
 
-**2. Add Credentials**
+
+**2.Create a multibranch pipelie and add the github repo link**
 
 
-to enable jenkins to login docker registry 
+**3.Download Plugins**
 
-and connect to local minikube at the same vm
+```
+Docker Plugin - Git - Github Plugin - Kubernetes Plugin - kubernetes cli Plugin - SonarQube Scanner
+```
+
+
+**4. Add Credentials**
+
+
+for docker registry 
+
+for local minikube at the same vm 
 
 
 ![image](https://user-images.githubusercontent.com/61191521/203888104-e0adafbb-46f5-4f1a-8723-3426434314a5.png)
 
+
+**5. Add kubernetes as a cloud**
+
+
+Encrept the data in crt and key files using base64 and replace the pathes of these 3 files with this data
+```
+cat /home/rana/.minikube/ca.crt | base64 -w 0; echo
+cat /home/rana/.minikube/profiles/minikube/client.crt | base64 -w 0; echo
+cat /home/rana/.minikube/profiles/minikube/client.key | base64 -w 0; echo
+```
+Add the .kube/config file as a secret file 
+Add the kubernetes credintials which we created "config (minikube kubeconfig)"
+
+
+**6. Start "Scan Multibranch Pipeline Now"**
 
 
 **NOW THE SPRING BOOT APP IS BUILT WITH DOCKER AND DEPLOYED IN KUBERNETES USING JENKINS**
