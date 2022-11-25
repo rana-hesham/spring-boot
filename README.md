@@ -141,18 +141,26 @@ pipeline {
 }
 ```
 
-In Prod Branch with 1 stage:
+In Prod Branch with a 2 stages:
 
 -Prod Depolyment Stage
 
 ```
-Pipeline {
+pipeline {
+    agent any
     stages {
-         stage(prod-deployment) {
+        stage(prod_start) {
             steps {
-                sh 'kubectl create namespace prod'
-                sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.1 prod --namespace=prod --replicas=3'
+                echo '...................HELLO FROM PROD BRANCH...................'
+            }
+        }
+        stage(prod_deployment) {
+            steps {
+                withKubeConfig([credentialsId: 'mykubeconfig']) {
+                    sh 'kubectl delete deployments --all'
+                    sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.2 prod-deployment --namespace=prod'
                 }
+            }
         }
     }
 }
@@ -170,7 +178,7 @@ and connect to local minikube at the same vm
 
 
 
-
+**NOW THE SPRING BOOT APP IS BUILT WITH DOCKER AND DEPLOYED IN KUBERNETES USING JENKINS**
 
 
 
@@ -452,45 +460,5 @@ Finished: SUCCESS
 ![image](https://user-images.githubusercontent.com/61191521/203887751-900bf004-c6a0-4e10-8089-9df24c2b8a0d.png)
 
 
-# Minikube
+![image](https://user-images.githubusercontent.com/61191521/203890915-df57a1ef-3e04-4348-9825-d3e527b6b998.png)
 
-**Deploy Spring Boot App to local minikube**
-
-![image](https://user-images.githubusercontent.com/61191521/203040513-21c80e6b-4694-400a-af15-3d57a04fc1a8.png)
-
-
-**Dev deployment (Imperative configuration)**
-
-kubectl create deployment --image=ranahesham/springbootapp:v1.1 dev --namespace=dev --replicas=3
-
-
-**Prod deployment (Declarative configuration)**
-
-kubectl create -f prod-deployments.yaml
-
-```
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: prod
-  namespace: prod
-spec:
-  selector:
-    matchLabels:
-      app: prod-springboot
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: prod-springboot
-    spec:
-      containers:
-        - name: demo-container
-          image: ranahesham/springbootapp:v1.1
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
-```
-
-
-![image](https://user-images.githubusercontent.com/61191521/203043745-6d90d65b-7216-4490-998a-f6e8218b5e5f.png)
