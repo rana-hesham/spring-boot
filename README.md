@@ -179,17 +179,21 @@ for local minikube at the same vm
 **5. Add kubernetes as a cloud**
 
 
-Encrept the data in crt and key files using base64 and replace the pathes of these 3 files with this data
+Encrept the data in crt and key files using base64 and replace the pathes of these 3 files with this data in .kube/config file
 ```
 cat /home/rana/.minikube/ca.crt | base64 -w 0; echo
 cat /home/rana/.minikube/profiles/minikube/client.crt | base64 -w 0; echo
 cat /home/rana/.minikube/profiles/minikube/client.key | base64 -w 0; echo
 ```
 Add the .kube/config file as a secret file 
+
 Add the kubernetes credintials which we created "config (minikube kubeconfig)"
+
+![image](https://user-images.githubusercontent.com/61191521/203982730-edc5719a-081f-4ded-8d05-eca0e9881d44.png)
 
 
 **6. Start "Scan Multibranch Pipeline Now"**
+
 
 
 **NOW THE SPRING BOOT APP IS BUILT WITH DOCKER AND DEPLOYED IN KUBERNETES USING JENKINS**
