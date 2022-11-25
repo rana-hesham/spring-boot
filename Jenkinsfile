@@ -30,7 +30,7 @@ pipeline {
             steps {
                 withKubeConfig([credentialsId: 'mykubeconfig']) {
                     sh 'kubectl delete deployments --all'
-                    sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.2 dev-deployment'
+                    sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.2 dev-deployment --namespace=dev'
                 }
             }
         }
