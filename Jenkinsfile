@@ -14,7 +14,9 @@ pipeline {
         }
         stage(sonar_qube) {
             steps {
-                echo '...................SONARQUBE STAGE................'
+                withSonarQubeEnv('SonarQube') {
+                    sh "./gradlew sonarqube"
+                }
             }
         }
         stage(build) {
