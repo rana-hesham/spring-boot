@@ -1,3 +1,10 @@
+buildscript {
+  repositories { mavenCentral() }
+  dependencies {
+    classpath 'com.netflix.nebula:gradle-lint-plugin:latest.release'
+  }
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
@@ -17,13 +24,6 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-buildscript {
-  repositories { mavenCentral() }
-  dependencies {
-    classpath 'com.netflix.nebula:gradle-lint-plugin:latest.release'
-  }
 }
 
 
