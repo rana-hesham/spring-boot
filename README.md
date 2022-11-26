@@ -248,7 +248,7 @@ Fetching upstream changes from origin
 Seen branch in repository origin/dev
 Seen branch in repository origin/prod
 Seen 2 remote branches
-Obtained Jenkinsfile from 3abf6d9ff59dd7ac956842bda9e4d1bc5ce55f66
+Obtained Jenkinsfile from 81536cb246dcbeb29e8af29179fe91475d3fd4c1
 [Pipeline] Start of Pipeline
 [Pipeline] node
 Running on Jenkins in /var/lib/jenkins/workspace/spring-boot-app_dev
@@ -267,28 +267,37 @@ Fetching upstream changes from https://github.com/rana-hesham/spring-boot.git
  > git --version # timeout=10
  > git --version # 'git version 2.25.1'
  > git fetch --no-tags --force --progress -- https://github.com/rana-hesham/spring-boot.git +refs/heads/*:refs/remotes/origin/* # timeout=10
-Checking out Revision 3abf6d9ff59dd7ac956842bda9e4d1bc5ce55f66 (dev)
+Checking out Revision 81536cb246dcbeb29e8af29179fe91475d3fd4c1 (dev)
  > git config core.sparsecheckout # timeout=10
- > git checkout -f 3abf6d9ff59dd7ac956842bda9e4d1bc5ce55f66 # timeout=10
-Commit message: "Update Jenkinsfile"
- > git rev-list --no-walk 72d156c212bfe57708fdaf995aa73c23da41d359 # timeout=10
+ > git checkout -f 81536cb246dcbeb29e8af29179fe91475d3fd4c1 # timeout=10
+Commit message: "Update README.md"
+ > git rev-list --no-walk bb70f33552a7dcce955cca9e7224617eb0a7f288 # timeout=10
 [Pipeline] }
 [Pipeline] // stage
 [Pipeline] withEnv
 [Pipeline] {
 [Pipeline] stage
 [Pipeline] { (lint)
-[Pipeline] echo
-...................LINT STAGE................
+[Pipeline] sh
++ chmod +x gradlew
+[Pipeline] sh
++ ./gradlew lint
+Starting a Gradle Daemon (subsequent builds will be faster)
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :compileTestJava UP-TO-DATE
+> Task :lintGradle
+> Task :autoLintGradle
+
+BUILD SUCCESSFUL in 12s
+5 actionable tasks: 2 executed, 3 up-to-date
 [Pipeline] }
 [Pipeline] // stage
 [Pipeline] stage
 [Pipeline] { (unit_test)
 [Pipeline] sh
-+ chmod +x gradlew
-[Pipeline] sh
 + ./gradlew test
-Starting a Gradle Daemon (subsequent builds will be faster)
 > Task :compileJava UP-TO-DATE
 > Task :processResources UP-TO-DATE
 > Task :classes UP-TO-DATE
@@ -296,15 +305,30 @@ Starting a Gradle Daemon (subsequent builds will be faster)
 > Task :processTestResources NO-SOURCE
 > Task :testClasses UP-TO-DATE
 > Task :test UP-TO-DATE
+> Task :autoLintGradle
 
-BUILD SUCCESSFUL in 10s
-4 actionable tasks: 4 up-to-date
+BUILD SUCCESSFUL in 1s
+5 actionable tasks: 1 executed, 4 up-to-date
 [Pipeline] }
 [Pipeline] // stage
 [Pipeline] stage
 [Pipeline] { (sonar_qube)
-[Pipeline] echo
-...................SONARQUBE STAGE................
+[Pipeline] withSonarQubeEnv
+Injecting SonarQube environment variables using the configuration: SonarQube
+[Pipeline] {
+[Pipeline] sh
++ ./gradlew sonarqube
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :compileTestJava UP-TO-DATE
+> Task :sonarqube
+> Task :autoLintGradle
+
+BUILD SUCCESSFUL in 9s
+5 actionable tasks: 2 executed, 3 up-to-date
+[Pipeline] }
+[Pipeline] // withSonarQubeEnv
 [Pipeline] }
 [Pipeline] // stage
 [Pipeline] stage
@@ -322,7 +346,7 @@ https://docs.docker.com/engine/reference/commandline/login/#credentials-store
 Login Succeeded
 [Pipeline] sh
 + docker build --pull --rm -f Dockerfile -t ranahesham/springbootapp:v1.2 .
-Sending build context to Docker daemon  789.5kB
+Sending build context to Docker daemon  1.097MB
 
 Step 1/10 : FROM gradle:7.1.0-jdk11 AS build
 7.1.0-jdk11: Pulling from library/gradle
@@ -333,13 +357,13 @@ Step 2/10 : RUN mkdir /home/gradle/src
  ---> Using cache
  ---> 4bbffb59d78f
 Step 3/10 : COPY --chown=gradle:gradle . /home/gradle/src
- ---> 6d35666dd038
+ ---> f19a10b875c7
 Step 4/10 : WORKDIR /home/gradle/src
- ---> Running in 3f82140ae37d
-Removing intermediate container 3f82140ae37d
- ---> 8d8035b187cc
+ ---> Running in 887a2c80891e
+Removing intermediate container 887a2c80891e
+ ---> 785d799b37f8
 Step 5/10 : RUN gradle build --no-daemon
- ---> Running in 32c40bb42e6d
+ ---> Running in 6d662aa89f43
 
 Welcome to Gradle 7.1!
 
@@ -364,11 +388,12 @@ Daemon will be stopped at the end of the build
 > Task :test
 > Task :check
 > Task :build
+> Task :autoLintGradle
 
-BUILD SUCCESSFUL in 1m 14s
-7 actionable tasks: 7 executed
-Removing intermediate container 32c40bb42e6d
- ---> 54f8be9b4486
+BUILD SUCCESSFUL in 1m 25s
+8 actionable tasks: 8 executed
+Removing intermediate container 6d662aa89f43
+ ---> 04a38997a7de
 Step 6/10 : FROM openjdk:11-jre-slim
 11-jre-slim: Pulling from library/openjdk
 Digest: sha256:93af7df2308c5141a751c4830e6b6c5717db102b3b31f012ea29d842dc4f2b02
@@ -381,17 +406,17 @@ Step 8/10 : RUN mkdir /app
  ---> Using cache
  ---> e57d87d770e4
 Step 9/10 : COPY --from=build /home/gradle/src/build/libs/demo-0.0.1-SNAPSHOT.jar /app/spring-boot-application.jar
- ---> d3c7f3732ab6
+ ---> 67f27f5aded2
 Step 10/10 : ENTRYPOINT ["java", "-XX:+UnlockExperimentalVMOptions", "-Djava.security.egd=file:/dev/./urandom","-jar","/app/spring-boot-application.jar"]
- ---> Running in dbb539c0b06f
-Removing intermediate container dbb539c0b06f
- ---> 6131f2594602
-Successfully built 6131f2594602
+ ---> Running in b0280f3c52de
+Removing intermediate container b0280f3c52de
+ ---> c194c79f1ede
+Successfully built c194c79f1ede
 Successfully tagged ranahesham/springbootapp:v1.2
 [Pipeline] sh
 + docker image push ranahesham/springbootapp:v1.2
 The push refers to repository [docker.io/ranahesham/springbootapp]
-a0b4f2f22969: Preparing
+4b0253545330: Preparing
 747cac21860a: Preparing
 d7802b8508af: Preparing
 e3abdc2e9252: Preparing
@@ -399,12 +424,12 @@ eafe6e032dbd: Preparing
 92a4e8a3140f: Preparing
 92a4e8a3140f: Waiting
 e3abdc2e9252: Layer already exists
-eafe6e032dbd: Layer already exists
 747cac21860a: Layer already exists
 d7802b8508af: Layer already exists
+eafe6e032dbd: Layer already exists
 92a4e8a3140f: Layer already exists
-a0b4f2f22969: Pushed
-v1.2: digest: sha256:bc6ef1cba404f96022dc553f02442111186e74a02abc9484cdc0879b9349ac5b size: 1576
+4b0253545330: Pushed
+v1.2: digest: sha256:4a8f0fb48270963e7abf33e3ea90b425cf4249bb174238e5cbb6896683d2e04f size: 1576
 [Pipeline] }
 [Pipeline] // withCredentials
 [Pipeline] }
@@ -414,8 +439,8 @@ v1.2: digest: sha256:bc6ef1cba404f96022dc553f02442111186e74a02abc9484cdc0879b934
 [Pipeline] withKubeConfig
 [Pipeline] {
 [Pipeline] sh
-+ kubectl delete deployments --all
-No resources found
++ kubectl delete deployment dev-deployment -n=dev
+deployment.apps "dev-deployment" deleted
 [Pipeline] sh
 + kubectl create deployment --image=ranahesham/springbootapp:v1.2 dev-deployment --namespace=dev
 deployment.apps/dev-deployment created
@@ -448,7 +473,7 @@ Fetching upstream changes from origin
 Seen branch in repository origin/dev
 Seen branch in repository origin/prod
 Seen 2 remote branches
-Obtained Jenkinsfile from 805424b7b6adfe3ca4f2d10fd316135cb813a846
+Obtained Jenkinsfile from 3812058b944872f7929406b367fba018eedecfa2
 [Pipeline] Start of Pipeline
 [Pipeline] node
 Running on Jenkins in /var/lib/jenkins/workspace/spring-boot-app_prod
@@ -467,27 +492,23 @@ Fetching upstream changes from https://github.com/rana-hesham/spring-boot.git
  > git --version # timeout=10
  > git --version # 'git version 2.25.1'
  > git fetch --no-tags --force --progress -- https://github.com/rana-hesham/spring-boot.git +refs/heads/*:refs/remotes/origin/* # timeout=10
-Checking out Revision 805424b7b6adfe3ca4f2d10fd316135cb813a846 (prod)
+Checking out Revision 3812058b944872f7929406b367fba018eedecfa2 (prod)
  > git config core.sparsecheckout # timeout=10
- > git checkout -f 805424b7b6adfe3ca4f2d10fd316135cb813a846 # timeout=10
+ > git checkout -f 3812058b944872f7929406b367fba018eedecfa2 # timeout=10
 Commit message: "Update Jenkinsfile"
- > git rev-list --no-walk 4f78ac08c56d0b75e085a1921b06730f61d99698 # timeout=10
+ > git rev-list --no-walk 3812058b944872f7929406b367fba018eedecfa2 # timeout=10
 [Pipeline] }
 [Pipeline] // stage
 [Pipeline] withEnv
 [Pipeline] {
 [Pipeline] stage
-[Pipeline] { (prod_start)
-[Pipeline] echo
-...................HELLO FROM PROD BRANCH...................
-[Pipeline] }
-[Pipeline] // stage
-[Pipeline] stage
 [Pipeline] { (prod_deployment)
 [Pipeline] withKubeConfig
 [Pipeline] {
+[Pipeline] echo
+...................HELLO FROM PROD BRANCH...................
 [Pipeline] sh
-+ kubectl delete deployments --all
++ kubectl delete deployment prod-deployment -n=prod
 deployment.apps "prod-deployment" deleted
 [Pipeline] sh
 + kubectl create deployment --image=ranahesham/springbootapp:v1.2 prod-deployment --namespace=prod
