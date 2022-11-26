@@ -27,8 +27,6 @@ buildscript {
 }
 
 
-apply plugin: 'nebula.lint'
-
 tasks.named('test') {
 	useJUnitPlatform()
 }
