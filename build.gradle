@@ -29,3 +29,5 @@ tasks.named('sonarqube') {
              }
         }
 }
+
+project.tasks["sonarqube"].dependsOn "anotherTask"
