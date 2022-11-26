@@ -174,7 +174,7 @@ Add sonarqube task to builg.gradle file
 
 Run a sonarqube docker image in the azure vm
 
-![image](https://user-images.githubusercontent.com/61191521/204096740-893aa4d8-2355-4988-9b7c-fa3f38f8889c.png)
+![image](https://user-images.githubusercontent.com/61191521/204103295-4f733192-6673-4493-b30f-bf5f39d2258b.png)
 
 and open port 9000 in azure 
 
