@@ -16,7 +16,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	project.tasks["sonarqube"].dependsOn "anotherTask"
+	project.tasks["sonarqube"].dependsOn jacocoTestReport
 }
 
 tasks.named('test') {
