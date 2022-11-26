@@ -3,7 +3,7 @@
 
 ## Technologies
 ``` 
-Azure VM - Docker - GitHub - Jenkins - Kubernetes 
+Azure VM - Docker - GitHub - SonarQube - Jenkins - Kubernetes 
 ```
 
 
