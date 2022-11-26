@@ -183,10 +183,10 @@ and add jenkins path to sonarqube : sonarqube(http://localhost:9000) --> adminis
 Add sonarqube to sonarqube servers after install its plugin in a configure system and add its token as a secret text and add (azure vm public ip address:9000) as a server url
 
 
-![image](https://user-images.githubusercontent.com/61191521/204110281-438f5e7e-4b95-4d2f-a1c8-e3040181b049.png)
+![image](https://user-images.githubusercontent.com/61191521/204110409-410ad969-9588-441e-9430-e21736d481e7.png)
 
 
-![image](https://user-images.githubusercontent.com/61191521/204110233-bdb04008-d6c4-4408-837a-40f8ddae8c3e.png)
+![image](https://user-images.githubusercontent.com/61191521/204110426-57cefaab-4b94-40fb-ab86-310c37ba9855.png)
 
 
 
