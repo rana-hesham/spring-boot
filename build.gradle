@@ -24,6 +24,7 @@ tasks.named('test') {
 
 sonarqube {
      properties {
+           property 'sonar.host.url', 'http://20.21.120.101:9000'
 	   property "sonar.sourceEncoding", "UTF-8"
      }
 }
