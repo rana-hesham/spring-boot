@@ -197,8 +197,9 @@ for docker registry
 
 for local minikube at the same vm 
 
+(we add sonarqube credential in the previous step)
 
-![image](https://user-images.githubusercontent.com/61191521/203888104-e0adafbb-46f5-4f1a-8723-3426434314a5.png)
+![image](https://user-images.githubusercontent.com/61191521/204111209-a1314007-3c08-4874-af2c-ac3f62b03152.png)
 
 
 
