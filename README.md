@@ -184,7 +184,7 @@ then add a token to sonarqube : sonarqube(http://localhost:9000) --> administrat
 
 and add jenkins path to sonarqube : sonarqube(http://localhost:9000) --> administration --> configurations --> webhooks --> create
 
-Add sonarqube to sonarqube servers after install its plugin in a configure system and add its token as a secret text and add (azure vm ip address:9000) as a server url
+Add sonarqube to sonarqube servers after install its plugin in a configure system and add its token as a secret text and add (azure vm public ip address:9000) as a server url
 
 
 ![image](https://user-images.githubusercontent.com/61191521/204102807-4d1d335f-16fa-43a2-9beb-ddc323455c53.png)
