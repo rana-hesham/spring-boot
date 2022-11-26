@@ -14,8 +14,8 @@ pipeline {
         }
         stage(sonar_qube) {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh "./gradlew sonarqube"
+                withSonarQubeEnv('sonarqube') {
+                    sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
         }
