@@ -25,7 +25,7 @@ Azure VM - Docker - GitHub - Jenkins - Kubernetes
 
 
 
-## Dockerize Spring Boot Project 
+## Dockerize Spring Boot App 
 
 
 **create a Dockerfile (multi-stage build)**
