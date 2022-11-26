@@ -106,7 +106,9 @@ pipeline {
         }
         stage(sonar_qube) {
             steps {
-                echo '...................SONARQUBE STAGE................'
+                withSonarQubeEnv('SonarQube') {
+                    sh "./gradlew sonarqube"
+                }
             }
         }
         stage(build) {
@@ -121,7 +123,8 @@ pipeline {
         stage(dev_deployment) {
             steps {
                 withKubeConfig([credentialsId: 'mykubeconfig']) {
-                    sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.2 dev_deployment'
+                    sh 'kubectl delete deployment dev-deployment -n=dev'
+                    sh 'kubectl create deployment --image=ranahesham/springbootapp:v1.2 dev-deployment --namespace=dev'
                 }
             }
         }
