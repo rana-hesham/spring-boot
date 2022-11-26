@@ -161,11 +161,26 @@ pipeline {
 **3. Download Plugins**
 
 ```
-Docker Plugin - Git - Github Plugin - Kubernetes Plugin - kubernetes cli Plugin - SonarQube Scanner
+Docker Plugin - Git - Github Plugin - SonarQube Scanner - Kubernetes Plugin - kubernetes cli Plugin
 ```
 
 
-**4. Add Credentials**
+**4. SonarQube** 
+
+Run a sonarqube docker image in the azure vm
+
+![image](https://user-images.githubusercontent.com/61191521/204096740-893aa4d8-2355-4988-9b7c-fa3f38f8889c.png)
+
+and open port 9000 in azure 
+
+![open azure port](https://user-images.githubusercontent.com/61191521/204096845-6e5d57b2-3b38-4023-b86c-599132a70db1.jpeg)
+
+then add a token to sonarqube : sonarqube(http://localhost:9000) --> administration --> security --> users --> update tokens
+
+Add sonarqube to sonarqube servers after install its plugin in a configure system and add its token as a secret text
+
+
+**5. Add Credentials**
 
 
 for docker registry 
@@ -176,7 +191,8 @@ for local minikube at the same vm
 ![image](https://user-images.githubusercontent.com/61191521/203888104-e0adafbb-46f5-4f1a-8723-3426434314a5.png)
 
 
-**5. Add kubernetes as a cloud**
+
+**6. Add kubernetes as a cloud**
 
 
 Encrept the data in crt and key files using base64 and replace the pathes of these 3 files with this data in .kube/config file
@@ -192,7 +208,7 @@ Add the kubernetes credintials which we created "config (minikube kubeconfig)"
 ![image](https://user-images.githubusercontent.com/61191521/203982730-edc5719a-081f-4ded-8d05-eca0e9881d44.png)
 
 
-**6. Start "Scan Multibranch Pipeline Now"**
+**7. Start "Scan Multibranch Pipeline Now"**
 
 
 
