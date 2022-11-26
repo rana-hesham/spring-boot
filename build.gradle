@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.5'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'java'
+	id "org.sonarqube" version "3.4.0.2513"
 }
 
 group = 'com.example'
@@ -15,8 +16,17 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	project.tasks["sonarqube"].dependsOn "anotherTask"
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks.named('sonarqube') {
+        sonarqube {
+             properties {
+                   property "sonar.sourceEncoding", "UTF-8"
+             }
+        }
 }
