@@ -4,7 +4,7 @@ pipeline {
         stage(lint) {
             steps {
                 sh 'chmod +x gradlew'
-                sh './gradlew test'
+                sh './gradlew lint'
             }
         }
         stage(unit_test) {
