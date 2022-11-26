@@ -222,7 +222,7 @@ Add the kubernetes credintials which we created "config (minikube kubeconfig)"
 
 
 
-![image](https://user-images.githubusercontent.com/61191521/203886950-cd2667ad-9867-4138-9fc3-97d3525a071c.png)
+![image](https://user-images.githubusercontent.com/61191521/204110102-c16e0e0f-4ceb-4a8f-b190-abb354d3e8c4.png)
 
 
 ![image](https://user-images.githubusercontent.com/61191521/203890915-df57a1ef-3e04-4348-9825-d3e527b6b998.png)
