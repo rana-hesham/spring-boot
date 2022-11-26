@@ -22,12 +22,8 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-tasks.named('sonarqube') {
-        sonarqube {
-             properties {
-                   property "sonar.sourceEncoding", "UTF-8"
-             }
-        }
+sonarqube {
+     properties {
+	   property "sonar.sourceEncoding", "UTF-8"
+     }
 }
-
-project.tasks["sonarqube"].dependsOn "anotherTask"
