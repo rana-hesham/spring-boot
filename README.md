@@ -170,7 +170,7 @@ Docker Plugin - Git - Github Plugin - SonarQube Scanner - Kubernetes Plugin - ku
 
 **4. SonarQube** 
 
-Add sonarqube task to builg.gradle file
+Add sonarqube task to build.gradle file
 
 Run a sonarqube docker image in the azure vm
 
@@ -508,4 +508,3 @@ deployment.apps/prod-deployment created
 [Pipeline] End of Pipeline
 Finished: SUCCESS
 ```
-
